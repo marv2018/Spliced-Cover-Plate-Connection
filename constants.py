@@ -1,6 +1,6 @@
 # Source : https://www.steelforlifebluebook.co.uk/pfc/bs5950/section-properties-dimensions-properties/
 
-#[beam deapth, web thickness, flange thickness, root radius, second moment of area]
+# [beam deapth, web thickness, flange thickness, root radius, second moment of area]
 beams = {
     "430x100x64": [430, 11.0, 19.0, 15, 21900],
     "380x100x54": [380, 9.5, 17.5, 15, 15000],
@@ -31,6 +31,20 @@ steel = {
     ("S355", "40"): [345, 470],
     ("S355", "63"): [335, 470],
 }
+
+bolt = {
+    ("4.6", "12"): [14, 16.2],
+    ("4.6", "16"): [18, 30.1],
+    ("4.6", "20"): [22, 47.0],
+    ("4.6", "24"): [26, 67.8],
+    ("4.6", "30"): [32, 108],
+    ("8.8", "12"): [14, 27.5],
+    ("8.8", "16"): [18, 60.3],
+    ("8.8", "20"): [22, 94.1],
+    ("8.8", "24"): [26, 136],
+    ("8.8", "30"): [32, 215],
+}
+
 
 web_diagram = {
     ("2", "2"): "2x2.jpeg",

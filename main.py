@@ -29,6 +29,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.steel_plate_change
         )
 
+        # Bolt
+        self.comboBox_bolt_class.currentIndexChanged.connect(self.boltChange)
+        self.comboBox_bolt_shank_diameter.currentIndexChanged.connect(self.boltChange)
+
         # Update pictures based on column/row
         self.spinBox_columns.valueChanged.connect(self.column_row_change)
         self.spinBox_rows.valueChanged.connect(self.column_row_change)
@@ -40,15 +44,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Update fields, a bit strange way of doing it ? ...
         self.steel_beam_change()
         self.steel_plate_change()
+        self.boltChange()
 
         pixmap = QtGui.QPixmap("media/2x2.jpeg")
-        height_of_label = 250
-        self.label_diagram.resize(400, height_of_label)
+        height_of_label = 301
+        self.label_diagram.resize(741, height_of_label)
         self.label_diagram.setPixmap(
             pixmap.scaled(self.label_diagram.size(), QtCore.Qt.IgnoreAspectRatio)
         )
 
     def calculate(self):
+        # -----------------------------------------------------------------------------
+        # BEAM GEOMETRY
+
         # Iweb = tw *tw^3 / 12
         iw = (
             float((self.lineEdit_web_thickness.text()))
@@ -68,6 +76,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lineEdit_ratio_bm.setText(str(int(Rbm)))
 
         self.lineEdit_bending_moment_cover.setText(str(int(Mratio)))
+        # -----------------------------------------------------------------------------
+        # BOLTS and forces tab
+
+        self.Med = float(self.lineEdit_axial_force.text())
+
+
+
+        # -----------------------------------------------------------------------------
 
     def column_row_change(self):
         # get current row and column from spinbox
@@ -124,6 +140,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         )
 
         self.depth_flange_fillets.setText(str(depth_flange_fillets_value))
+
+    def boltChange(self):
+
+        current_bolt_class = self.comboBox_bolt_class.currentText()
+        current_bolt_shank_diameter = self.comboBox_bolt_shank_diameter.currentText()
+
+        self.lineEdit_bolt_shear.setText(
+            str(constants.bolt[(current_bolt_class, current_bolt_shank_diameter)][0])
+        )
+        self.lineEdit_bolt_diameter.setText(
+            str(constants.bolt[(current_bolt_class, current_bolt_shank_diameter)][1])
+        )
 
 
 def calc_axis(x, y, p1, p2):
