@@ -10,6 +10,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__()
         self.setupUi(self)
 
+        self.row = 0
+        self.column = 0
+
         # Callback functions
         self.pushButton_calculate.clicked.connect(self.calculate)
 
@@ -62,35 +65,62 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             float((self.lineEdit_web_thickness.text()))
             * (float(self.lineEdit_web_height.text())) ** 3
         ) / 12
-        self.lineEdit_second_web_moment.setText(str(int(iw)))
+        self.lineEdit_second_web_moment.setText(str(iw))
 
         ip = (
             float(self.lineEdit_plate_thickness.text())
             * float(self.lineEdit_plate_depth.text()) ** 3
             / 12
         )
-        Rbm = ip / float(self.lineEdit_second_moment_single_pfc.text())
-        Mratio = float(self.lineEdit_axial_force.text()) * Rbm
+        ratio_bm = ip / float(self.lineEdit_second_moment_single_pfc.text())
+        m_ratio = float(self.lineEdit_axial_force.text()) * ratio_bm
 
-        self.lineEdit_second_moment_cover.setText(str(int(ip)))
-        self.lineEdit_ratio_bm.setText(str(int(Rbm)))
+        self.lineEdit_second_moment_cover.setText(str(ip))
+        self.lineEdit_ratio_bm.setText(str(ratio_bm))
 
-        self.lineEdit_bending_moment_cover.setText(str(int(Mratio)))
+        self.lineEdit_bending_moment_cover.setText(str(m_ratio))
+
+        # --------------------BOLTS AND FORCES TAB---------------------------------------------------------
+        self.lineEdit_bolts_mratio.setText(str(m_ratio))
+
+        f_ved = float(self.lineEdit_shear_force.text()) / (self.column*self.row)
+
+        self.lineEdit_f_ved.setText(str(f_ved))
+
+        p0 = float(self.lineEdit_p0.text())
+        p1 = float(self.lineEdit_p1.text())
+        p2 = float(self.lineEdit_p2.text())
+        e1 = float(self.lineEdit_e1.text())
+        e2 = float(self.lineEdit_e2.text())
+
+        m_add = float(self.lineEdit_shear_force.text()) * (p0 + (p1*(self.column - 1)/2))
+        self.lineEdit_madd.setText(str(m_add))
+
+        # --------------------WEB SPLICE TAB-------------------------------------------------
+        fb= 2.5* float(self.lineEdit_beam_ultimate_strength.text()) * float(self.comboBox_bolt_shank_diameter.currentText())
+        self.lineEdit_fb.setText(str(fb))
+
+        sum, comb = calc_axis(self.column,self.row,p1,p2)
+
+        self.lineEdit_i_bolt.setText(str(sum))
+
+        test = ""
+        abc = ' + '.join(comb)
+
+        self.label_ibolt.setText(abc)
+
+        print(comb)
+
+
         # -----------------------------------------------------------------------------
-        # BOLTS and forces tab
 
-        self.Med = float(self.lineEdit_axial_force.text())
-
-
-
-        # -----------------------------------------------------------------------------
 
     def column_row_change(self):
         # get current row and column from spinbox
-        row = self.spinBox_rows.text()
-        column = self.spinBox_columns.text()
+        self.row = int(self.spinBox_rows.text())
+        self.column = int(self.spinBox_columns.text())
 
-        pixmap = QtGui.QPixmap(f"media/{row}x{column}.jpeg")
+        pixmap = QtGui.QPixmap(f"media/{self.row}x{self.column}.jpeg")
 
         self.label_diagram.setPixmap(
             pixmap.scaled(self.label_diagram.size(), QtCore.Qt.IgnoreAspectRatio)
@@ -103,7 +133,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.beam_yield_strength.setText(
             str(constants.steel[(current_beam_grade, current_beam_thickness)][0])
         )
-        self.beam_ultimate_strength.setText(
+        self.lineEdit_beam_ultimate_strength.setText(
             (str(constants.steel[(current_beam_grade, current_beam_thickness)][1]))
         )
 
@@ -163,14 +193,19 @@ def calc_axis(x, y, p1, p2):
     x_total = 0
     y_total = 0
 
-    # Calculate X axis components
+    # Calculate axis components
     x_total, x_components = calc_i_bolt(x, y, p1)
     print(f"X Total:{x_total} X components:{x_components}")
 
     y_total, y_components = calc_i_bolt(y, x, p2)
-    print(f"Y total:{y_total} X:components{y_components}")
+    print(f"Y Total:{y_total} Y:components{y_components}")
 
-    print(f"Total (X+Y): {x_total + y_total}")
+    sum = x_total + y_total
+    print(f"Total (X+Y): {sum}")
+
+    combined_equation = x_components + y_components
+
+    return sum, combined_equation
 
 
 def calc_i_bolt(axis1, axis2, distance):
