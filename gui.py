@@ -495,7 +495,7 @@ class Ui_MainWindow(object):
         self.gridLayout_5.addWidget(self.label_143, 3, 2, 1, 1)
         self.lineEdit_f_hor = QtWidgets.QLineEdit(self.gridLayoutWidget_3)
         self.lineEdit_f_hor.setEnabled(False)
-        self.lineEdit_f_hor.setMaxLength(3)
+        self.lineEdit_f_hor.setMaxLength(10)
         self.lineEdit_f_hor.setFrame(True)
         self.lineEdit_f_hor.setClearButtonEnabled(False)
         self.lineEdit_f_hor.setObjectName("lineEdit_f_hor")
@@ -518,7 +518,7 @@ class Ui_MainWindow(object):
         self.gridLayout_5.addWidget(self.label_140, 4, 2, 1, 1)
         self.lineEdit_Fr = QtWidgets.QLineEdit(self.gridLayoutWidget_3)
         self.lineEdit_Fr.setEnabled(False)
-        self.lineEdit_Fr.setMaxLength(3)
+        self.lineEdit_Fr.setMaxLength(10)
         self.lineEdit_Fr.setFrame(True)
         self.lineEdit_Fr.setClearButtonEnabled(False)
         self.lineEdit_Fr.setObjectName("lineEdit_Fr")
@@ -531,7 +531,7 @@ class Ui_MainWindow(object):
         self.gridLayout_5.addWidget(self.label_148, 4, 0, 1, 1)
         self.lineEdit_f_ver = QtWidgets.QLineEdit(self.gridLayoutWidget_3)
         self.lineEdit_f_ver.setEnabled(False)
-        self.lineEdit_f_ver.setMaxLength(3)
+        self.lineEdit_f_ver.setMaxLength(10)
         self.lineEdit_f_ver.setFrame(True)
         self.lineEdit_f_ver.setClearButtonEnabled(False)
         self.lineEdit_f_ver.setObjectName("lineEdit_f_ver")
@@ -903,7 +903,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuAbout.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(3)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

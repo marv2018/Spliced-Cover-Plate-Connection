@@ -71,7 +71,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             float((self.lineEdit_web_thickness.text()))
             * (float(self.lineEdit_web_height.text())) ** 3
         ) / 12
-        self.lineEdit_second_web_moment.setText(str(iw))
+        self.lineEdit_second_web_moment.setText('{0:6.3f}'.format(iw))
 
         ip = (
             float(self.lineEdit_plate_thickness.text())
@@ -81,17 +81,17 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         ratio_bm = ip / float(self.lineEdit_second_moment_single_pfc.text())
         m_ratio = float(self.lineEdit_axial_force.text()) * ratio_bm
 
-        self.lineEdit_second_moment_cover.setText(str(ip))
-        self.lineEdit_ratio_bm.setText(str(ratio_bm))
+        self.lineEdit_second_moment_cover.setText('{0:6.3f}'.format(ip))
+        self.lineEdit_ratio_bm.setText('{0:6.3f}'.format(ratio_bm))
 
-        self.lineEdit_bending_moment_cover.setText(str(m_ratio))
+        self.lineEdit_bending_moment_cover.setText('{0:6.3f}'.format(m_ratio))
 
         # --------------------BOLTS AND FORCES TAB---------------------------------------------------------
-        self.lineEdit_bolts_mratio.setText(str(m_ratio))
+        self.lineEdit_bolts_mratio.setText('{0:6.3f}'.format(m_ratio))
 
         f_ved = float(self.lineEdit_shear_force.text()) / (self.column * self.row)
 
-        self.lineEdit_f_ved.setText(str(f_ved))
+        self.lineEdit_f_ved.setText('{0:6.3f}'.format(f_ved))
 
         p0 = float(self.lineEdit_p0.text())
         p1 = float(self.lineEdit_p1.text())
@@ -102,7 +102,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         m_add = float(self.lineEdit_shear_force.text()) * (
             p0 + (p1 * (self.column - 1) / 2)
         )
-        self.lineEdit_madd.setText(str(m_add))
+        self.lineEdit_madd.setText('{0:6.3f}'.format(m_add))
 
         # --------------------WEB SPLICE TAB-------------------------------------------------
         fb = (
@@ -110,28 +110,28 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             * float(self.lineEdit_beam_ultimate_strength.text())
             * float(self.comboBox_bolt_shank_diameter.currentText())
         )
-        self.lineEdit_fb.setText(str(fb))
+        self.lineEdit_fb.setText('{0:6.3f}'.format(fb))
 
         Ibolt, equation = calc_axis(self.column, self.row, p1, p2)
-        self.lineEdit_i_bolt.setText(str(Ibolt))
+        self.lineEdit_i_bolt.setText('{0:6.3f}'.format(Ibolt))
         self.label_ibolt.setText(" + ".join(equation))
 
         # F horizonal
         f_hor = ((m_ratio + m_add) * p2) / Ibolt
-        self.lineEdit_f_hor.setText(str(f_hor))
+        self.lineEdit_f_hor.setText('{0:6.3f}'.format(f_hor))
 
         # F vertical
         f_ver = ((m_ratio + m_add) * 0.5 * p1) / Ibolt
-        self.lineEdit_f_ver.setText(str(f_hor))
+        self.lineEdit_f_ver.setText('{0:6.3f}'.format(f_ver))
 
         # F resultant
         f_r = sqrt((f_ved + f_ver) ** 2 + (f_hor) ** 2)
-        self.lineEdit_Fr.setText(str(f_r))
+        self.lineEdit_Fr.setText('{0:6.3f}'.format(f_r))
 
         # Fr / Fvrd ratio
         fr_fvrd_ratio = f_r / float(self.lineEdit_bolt_shear.text())
-        self.lineEdit_Fr_Fvrd.setText(str(fr_fvrd_ratio))
-        print(fr_fvrd_ratio)
+        self.lineEdit_Fr_Fvrd.setText('{0:6.3f}'.format(fr_fvrd_ratio))
+
         if fr_fvrd_ratio >= 1:
             self.label_Fr_Fvrd.setStyleSheet("color: red")
         else:
@@ -149,7 +149,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         phi_steel = float(self.lineEdit_partial_factor_steel.text())
 
         v_rd = (tp*hp/1.27) * fyp / (sqrt(3)*phi_steel)
-        self.lineEdit_Vrd.setText('{0:6.0f}'.format(v_rd))
+        self.lineEdit_Vrd.setText('{0:6.3f}'.format(v_rd))
 
         # Ved/Vrd ratio
         Ved_Vrd_ratio = float(self.lineEdit_shear_force.text()) / v_rd
@@ -161,16 +161,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # -------
         wplp = tp * hp**2
-        self.lineEdit_cover_plate_modulus.setText('{0:6.0f}'.format(wplp))
+        self.lineEdit_cover_plate_modulus.setText('{0:6.3f}'.format(wplp))
 
         mrd = fyp * wplp
-        self.lineEdit_cover_plate_bending_moment_resistance.setText('{0:6.0f}'.format(mrd))
+        self.lineEdit_cover_plate_bending_moment_resistance.setText('{0:6.3f}'.format(mrd))
 
         # TODO: find out what to call this value
 
         what_is_this = (m_ratio + m_add) / mrd
         print(what_is_this)
-        self.lineEdit_what_is_this.setText('{0:6.0f}'.format(what_is_this))
+        self.lineEdit_what_is_this.setText('{0:6.3f}'.format(what_is_this))
         if what_is_this >= 1:
             self.label_m_ratios.setStyleSheet("color: red")
         else:
