@@ -7,7 +7,6 @@ from gui import Ui_MainWindow
 import constants
 
 
-
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__()
@@ -86,7 +85,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # --------------------BOLTS AND FORCES TAB---------------------------------------------------------
         self.lineEdit_bolts_mratio.setText(str(m_ratio))
 
-        f_ved = float(self.lineEdit_shear_force.text()) / (self.column*self.row)
+        f_ved = float(self.lineEdit_shear_force.text()) / (self.column * self.row)
 
         self.lineEdit_f_ved.setText(str(f_ved))
 
@@ -96,36 +95,45 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         e1 = float(self.lineEdit_e1.text())
         e2 = float(self.lineEdit_e2.text())
 
-        m_add = float(self.lineEdit_shear_force.text()) * (p0 + (p1*(self.column - 1)/2))
+        m_add = float(self.lineEdit_shear_force.text()) * (
+            p0 + (p1 * (self.column - 1) / 2)
+        )
         self.lineEdit_madd.setText(str(m_add))
 
         # --------------------WEB SPLICE TAB-------------------------------------------------
-        fb= 2.5* float(self.lineEdit_beam_ultimate_strength.text()) * float(self.comboBox_bolt_shank_diameter.currentText())
+        fb = (
+            2.5
+            * float(self.lineEdit_beam_ultimate_strength.text())
+            * float(self.comboBox_bolt_shank_diameter.currentText())
+        )
         self.lineEdit_fb.setText(str(fb))
 
-        Ibolt, equation = calc_axis(self.column,self.row,p1,p2)
+        Ibolt, equation = calc_axis(self.column, self.row, p1, p2)
         self.lineEdit_i_bolt.setText(str(Ibolt))
-        self.label_ibolt.setText(' + '.join(equation))
+        self.label_ibolt.setText(" + ".join(equation))
 
         # F horizonal
-        f_hor = ((m_ratio + m_add) * p2 ) / Ibolt
+        f_hor = ((m_ratio + m_add) * p2) / Ibolt
         self.lineEdit_f_hor.setText(str(f_hor))
 
         # F vertical
-        f_ver = ((m_ratio + m_add) * 0.5 *p1 ) / Ibolt
+        f_ver = ((m_ratio + m_add) * 0.5 * p1) / Ibolt
         self.lineEdit_f_ver.setText(str(f_hor))
 
         # F resultant
-        f_rez = sqrt((f_ved+f_ver)**2 + (f__)**2)
+        f_r = sqrt((f_ved + f_ver) ** 2 + (f_hor) ** 2)
+        self.lineEdit_Fr.setText(str(f_r))
 
-        if f_rez >= 1:
-            self.label_Fr_Fvrd.setStyleSheet('color: red')
+        # Fr / Fvrd ratio
+        fr_fvrd_ratio = f_r / float(self.lineEdit_bolt_shear.text())
+        self.lineEdit_Fr_Fvrd.setText(str(fr_fvrd_ratio))
+        print(fr_fvrd_ratio)
+        if fr_fvrd_ratio >= 1:
+            self.label_Fr_Fvrd.setStyleSheet("color: red")
         else:
-            self.label_Fr_Fvrd.setStyleSheet('color: green')
-
+            self.label_Fr_Fvrd.setStyleSheet("color: green")
 
         # -----------------------------------------------------------------------------
-
 
     def column_row_change(self):
         # get current row and column from spinbox
