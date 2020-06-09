@@ -49,6 +49,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Update fields, a bit strange way of doing it ? ...
         self.steel_beam_change()
         self.steel_plate_change()
+        self.column_row_change()
         self.boltChange()
 
         pixmap = QtGui.QPixmap("media/2x2.jpeg")
@@ -59,6 +60,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         )
 
     def calculate(self):
+
+
+
         # -----------------------------------------------------------------------------
         # BEAM GEOMETRY
 
@@ -133,7 +137,44 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         else:
             self.label_Fr_Fvrd.setStyleSheet("color: green")
 
-        # -----------------------------------------------------------------------------
+        # ----------CALCULATIONS TAB-------------------------------------------------------------------
+        # Cover plate web resistance to combined bending, shear and axial force
+        # Copy a value... he wanted it like this.
+        self.lineEdit_Ved_copy.setText(self.lineEdit_shear_force.text())
+
+        # Calcualte Vrd = [(tp * hp) / 1.27] * [fyp / (3 ^ 0.5 * φ0)] single plate resistance
+        tp = float(self.lineEdit_plate_thickness.text())
+        hp = float(self.lineEdit_plate_depth.text())
+        fyp= float(self.lineEdit_plate_yield_strength.text())
+        phi_steel = float(self.lineEdit_partial_factor_steel.text())
+
+        v_rd = (tp*hp/1.27) * fyp / (sqrt(3)*phi_steel)
+        self.lineEdit_Vrd.setText('{0:6.0f}'.format(v_rd))
+
+        # Ved/Vrd ratio
+        Ved_Vrd_ratio = float(self.lineEdit_shear_force.text()) / v_rd
+
+        if Ved_Vrd_ratio >= 1:
+            self.label_ved_vrd.setStyleSheet("color: red")
+        else:
+            self.label_ved_vrd.setStyleSheet("color: green")
+
+        # -------
+        wplp = tp * hp**2
+        self.lineEdit_cover_plate_modulus.setText('{0:6.0f}'.format(wplp))
+
+        mrd = fyp * wplp
+        self.lineEdit_cover_plate_bending_moment_resistance.setText('{0:6.0f}'.format(mrd))
+
+        # TODO: find out what to call this value
+
+        what_is_this = (m_ratio + m_add) / mrd
+        print(what_is_this)
+        self.lineEdit_what_is_this.setText('{0:6.0f}'.format(what_is_this))
+        if what_is_this >= 1:
+            self.label_m_ratios.setStyleSheet("color: red")
+        else:
+            self.label_m_ratios.setStyleSheet("color: green")
 
     def column_row_change(self):
         # get current row and column from spinbox
