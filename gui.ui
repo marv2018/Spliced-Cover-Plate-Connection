@@ -1044,7 +1044,7 @@
             </font>
            </property>
            <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Vertical component of the force&lt;br/&gt;on each top and bottom bolt&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;F&lt;/span&gt;&lt;span style=&quot; font-weight:600; vertical-align:sub;&quot;&gt;ver &lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;=&lt;/span&gt;The Vertical component of the force&lt;br/&gt;on each top and bottom bolt&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>
@@ -1056,7 +1056,7 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QLineEdit" name="lineEdit_64">
+          <widget class="QLineEdit" name="lineEdit_f_hor">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -1095,7 +1095,7 @@
             </font>
            </property>
            <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The polar moment of inertia&lt;br/&gt;of the bolt group is:&lt;br/&gt;I&lt;span style=&quot; vertical-align:sub;&quot;&gt;bolt =&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The polar moment of inertia&lt;br/&gt;of the bolt group is:&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;I&lt;/span&gt;&lt;span style=&quot; font-weight:600; vertical-align:sub;&quot;&gt;bolt =&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>
@@ -1130,12 +1130,12 @@
             </font>
            </property>
            <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The resultant force on the&lt;br/&gt; most highly loaded bolt &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;F&lt;/span&gt;&lt;span style=&quot; font-weight:600; vertical-align:sub;&quot;&gt;R&lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;= &lt;/span&gt;The resultant force on the&lt;br/&gt;most highly loaded bolt &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="QLineEdit" name="lineEdit_61">
+          <widget class="QLineEdit" name="lineEdit_f_ver">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -1172,12 +1172,12 @@
             </font>
            </property>
            <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The horizontal component of the force &lt;br/&gt;on each top and bottom bolt&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;F&lt;/span&gt;&lt;span style=&quot; font-weight:600; vertical-align:sub;&quot;&gt;hor &lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;=&lt;/span&gt; The horizontal component of the force &lt;br/&gt;on each top and bottom bolt&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>
          <item row="5" column="0">
-          <widget class="QLabel" name="label_142">
+          <widget class="QLabel" name="label_Fr_Fvrd">
            <property name="font">
             <font>
              <pointsize>10</pointsize>
@@ -1325,7 +1325,7 @@
             </font>
            </property>
            <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Full bearing resistance of opening&lt;br/&gt;in beam web(from bolt force)&lt;br/&gt;F&lt;span style=&quot; vertical-align:sub;&quot;&gt;b&lt;/span&gt;=2.5*f&lt;span style=&quot; vertical-align:sub;&quot;&gt;u&lt;/span&gt;*d*t&lt;span style=&quot; vertical-align:sub;&quot;&gt;w &lt;/span&gt;/ φ&lt;span style=&quot; vertical-align:sub;&quot;&gt;m2&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Full bearing resistance of opening&lt;br/&gt;in beam web(from bolt force)&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;F&lt;/span&gt;&lt;span style=&quot; font-weight:600; vertical-align:sub;&quot;&gt;b&lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;=2.5*f&lt;/span&gt;&lt;span style=&quot; font-weight:600; vertical-align:sub;&quot;&gt;u&lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;*d*t&lt;/span&gt;&lt;span style=&quot; font-weight:600; vertical-align:sub;&quot;&gt;w &lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;/ φ&lt;/span&gt;&lt;span style=&quot; font-weight:600; vertical-align:sub;&quot;&gt;m2&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>

@@ -1,8 +1,11 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from math import sqrt
+
 from gui import Ui_MainWindow
 import constants
+
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -100,16 +103,25 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         fb= 2.5* float(self.lineEdit_beam_ultimate_strength.text()) * float(self.comboBox_bolt_shank_diameter.currentText())
         self.lineEdit_fb.setText(str(fb))
 
-        sum, comb = calc_axis(self.column,self.row,p1,p2)
+        Ibolt, equation = calc_axis(self.column,self.row,p1,p2)
+        self.lineEdit_i_bolt.setText(str(Ibolt))
+        self.label_ibolt.setText(' + '.join(equation))
 
-        self.lineEdit_i_bolt.setText(str(sum))
+        # F horizonal
+        f_hor = ((m_ratio + m_add) * p2 ) / Ibolt
+        self.lineEdit_f_hor.setText(str(f_hor))
 
-        test = ""
-        abc = ' + '.join(comb)
+        # F vertical
+        f_ver = ((m_ratio + m_add) * 0.5 *p1 ) / Ibolt
+        self.lineEdit_f_ver.setText(str(f_hor))
 
-        self.label_ibolt.setText(abc)
+        # F resultant
+        f_rez = sqrt((f_ved+f_ver)**2 + (f__)**2)
 
-        print(comb)
+        if f_rez >= 1:
+            self.label_Fr_Fvrd.setStyleSheet('color: red')
+        else:
+            self.label_Fr_Fvrd.setStyleSheet('color: green')
 
 
         # -----------------------------------------------------------------------------
