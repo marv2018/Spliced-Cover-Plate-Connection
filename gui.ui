@@ -36,7 +36,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -1362,7 +1362,7 @@
          <rect>
           <x>10</x>
           <y>120</y>
-          <width>233</width>
+          <width>238</width>
           <height>138</height>
          </rect>
         </property>
@@ -1623,8 +1623,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Distance to centreline
-Height of cover plate</string>
+            <string>Distance to centreline</string>
            </property>
           </widget>
          </item>
@@ -1727,7 +1726,7 @@ Height of cover plate</string>
           </widget>
          </item>
          <item row="4" column="1">
-          <widget class="QLineEdit" name="lineEdit_89">
+          <widget class="QLineEdit" name="lineEdit_ved_vrd">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -1773,7 +1772,7 @@ Height of cover plate</string>
             </font>
            </property>
            <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cover plate web resistance to combined bending, &lt;br/&gt;shear and axial force&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cover plate web resistance to combined bending, &lt;br/&gt;shear&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>
@@ -1827,7 +1826,7 @@ Height of cover plate</string>
             </font>
            </property>
            <property name="text">
-            <string>Combined, bending moment and axial compression check</string>
+            <string>Combined and bending moment check</string>
            </property>
           </widget>
          </item>
@@ -1853,7 +1852,7 @@ Height of cover plate</string>
           </widget>
          </item>
          <item row="4" column="1">
-          <widget class="QLineEdit" name="lineEdit_what_is_this">
+          <widget class="QLineEdit" name="lineEdit_m_check">
            <property name="enabled">
             <bool>false</bool>
            </property>

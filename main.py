@@ -145,7 +145,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Calcualte Vrd = [(tp * hp) / 1.27] * [fyp / (3 ^ 0.5 * φ0)] single plate resistance
         tp = float(self.lineEdit_plate_thickness.text())
         hp = float(self.lineEdit_plate_depth.text())
-        fyp= float(self.lineEdit_plate_yield_strength.text())
+        fyp = float(self.lineEdit_plate_yield_strength.text())
         phi_steel = float(self.lineEdit_partial_factor_steel.text())
 
         v_rd = (tp*hp/1.27) * fyp / (sqrt(3)*phi_steel)
@@ -153,25 +153,23 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Ved/Vrd ratio
         Ved_Vrd_ratio = float(self.lineEdit_shear_force.text()) / v_rd
+        self.lineEdit_ved_vrd.setText('{0:6.3f}'.format(Ved_Vrd_ratio))
 
         if Ved_Vrd_ratio >= 1:
             self.label_ved_vrd.setStyleSheet("color: red")
         else:
             self.label_ved_vrd.setStyleSheet("color: green")
 
-        # -------
+        # ---Combined and bending moment check----
         wplp = tp * hp**2
         self.lineEdit_cover_plate_modulus.setText('{0:6.3f}'.format(wplp))
 
         mrd = fyp * wplp
         self.lineEdit_cover_plate_bending_moment_resistance.setText('{0:6.3f}'.format(mrd))
 
-        # TODO: find out what to call this value
-
-        what_is_this = (m_ratio + m_add) / mrd
-        print(what_is_this)
-        self.lineEdit_what_is_this.setText('{0:6.3f}'.format(what_is_this))
-        if what_is_this >= 1:
+        m_check = (m_ratio + m_add) / mrd
+        self.lineEdit_m_check.setText('{0:6.3f}'.format(m_check))
+        if m_check >= 1:
             self.label_m_ratios.setStyleSheet("color: red")
         else:
             self.label_m_ratios.setStyleSheet("color: green")
